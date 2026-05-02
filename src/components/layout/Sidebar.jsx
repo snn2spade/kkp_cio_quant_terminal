@@ -14,7 +14,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Terminal,
-  User
+  User,
+  Sun,
+  Moon
 } from 'lucide-react'
 
 const menuItems = [
@@ -39,6 +41,24 @@ const colorMap = {
 
 function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return !document.documentElement.classList.contains('light')
+    }
+    return true
+  })
+
+  const toggleTheme = () => {
+    const newIsDark = !isDark
+    setIsDark(newIsDark)
+    if (newIsDark) {
+      document.documentElement.classList.remove('light')
+      localStorage.setItem('theme', 'dark')
+    } else {
+      document.documentElement.classList.add('light')
+      localStorage.setItem('theme', 'light')
+    }
+  }
 
   return (
     <div className={cn(
@@ -102,7 +122,7 @@ function Sidebar() {
 
       <Separator className="my-2 bg-border/20" />
 
-      <div className="px-2 mb-3">
+      <div className="px-2 mb-3 space-y-2">
         <Button
           variant="ghost"
           size="icon"
@@ -111,6 +131,15 @@ function Sidebar() {
           title={isCollapsed ? 'Expand' : 'Collapse'}
         >
           {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggleTheme}
+          className="w-full flex items-center justify-center hover:bg-muted/50"
+          title={isDark ? 'Switch to Light' : 'Switch to Dark'}
+        >
+          {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
         </Button>
       </div>
 
