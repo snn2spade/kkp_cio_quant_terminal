@@ -18,7 +18,7 @@ The application should resemble a **Bloomberg-style but modern web terminal** wi
 
 - Frontend: Vite + React + Tailwind.css + shadcn/ui
 - Backend: FastAPI (API gateway + business logic)
-- Database/Auth: Supabase (Postgres + Auth)
+- Database: Postgres
 - Charts: ECharts + TradingView Lightweight Charts
 - Tables: AG Grid
 
@@ -30,19 +30,10 @@ The application should resemble a **Bloomberg-style but modern web terminal** wi
 - Card-based modular layout
 - High information density (compact spacing)
 - Functional color segmentation
-    - Red → Homepage
-    - Blue → Analysts
-    - Green → Market
-    - Amber/Yellow → Data
-    - Purple → Signal
-    - Orange → Portfolio
-    - Teal → Workflow
+
 
 **Core System Requirements**
 
-- User System
-    - Login / logout
-    - User-based data isolation
 - Architecture Principles
     - Modular design (plug-and-play components)
     - Separate:
@@ -117,13 +108,11 @@ The application should resemble a **Bloomberg-style but modern web terminal** wi
 - **Portfolio**
     - Description:
         - This page allow user for portfolio construction, backtesting, monitoring
-        - Portfolio own by user but can specific to be public  (show to others)/private
     - Component list:
         - xxx
 - **Workflow**
     - Description:
-        - This page allow user for add their own workflow (pre-defined function but with customized input)
-        - Workflow own by user but can specific to be public (show to others)/private
+        - This page allow user for add workflow (pre-defined function but with customized input)
         - Example of workflow, allow user to schedule portfolio summarized daily as text to selected channel
     - Component list:
         - xxx

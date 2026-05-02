@@ -150,8 +150,8 @@ function Sidebar() {
           </div>
           {!isCollapsed && (
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-foreground truncate">John Analyst</p>
-              <p className="text-[10px] text-muted-foreground font-medium">Senior</p>
+              <p className="text-xs font-semibold text-foreground truncate">KKP Analyst</p>
+              <p className="text-[10px] text-muted-foreground font-medium">Admin</p>
             </div>
           )}
         </div>
