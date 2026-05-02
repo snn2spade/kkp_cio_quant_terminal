@@ -16,11 +16,11 @@ The application should resemble a **Bloomberg-style but modern web terminal** wi
 
 **Tech Stack (Opinionated)**:
 
-- Frontend: Vite + React + Tailwind + shadcn/ui
+- Frontend: Vite + React + Tailwind.css + shadcn/ui
 - Backend: FastAPI (API gateway + business logic)
 - Database/Auth: Supabase (Postgres + Auth)
 - Charts: ECharts + TradingView Lightweight Charts
-- Tables: TanStack Table / AG Grid
+- Tables: AG Grid
 
 **UI Theme Style:**
 

@@ -43,7 +43,7 @@ function Sidebar() {
   return (
     <div className={cn(
       "backdrop-blur-xl bg-card/40 border-r border-border flex flex-col h-screen sticky top-0 transition-all duration-300 shadow-lg",
-      isCollapsed ? 'w-20' : 'w-56'
+      isCollapsed ? 'w-20 overflow-hidden' : 'w-56'
     )}>
       <div className="p-4 border-b border-border/30 backdrop-blur-sm">
         <div className="flex items-center justify-between">
@@ -65,15 +65,6 @@ function Sidebar() {
               </div>
             </div>
           )}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className="ml-2 flex-shrink-0 hover:bg-muted/50"
-            title={isCollapsed ? 'Expand' : 'Collapse'}
-          >
-            {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-          </Button>
         </div>
       </div>
 
@@ -111,8 +102,20 @@ function Sidebar() {
 
       <Separator className="my-2 bg-border/20" />
 
+      <div className="px-2 mb-3">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="w-full flex items-center justify-center hover:bg-muted/50"
+          title={isCollapsed ? 'Expand' : 'Collapse'}
+        >
+          {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+        </Button>
+      </div>
+
       <div className="p-3 backdrop-blur-sm bg-muted/20 rounded-lg mx-2 mb-3 border border-border/30">
-        <div className="flex items-center space-x-3">
+        <div className={cn("flex items-center", isCollapsed ? "justify-center" : "space-x-3")}>
           <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/40 flex items-center justify-center flex-shrink-0">
             <User className="w-4 h-4 text-primary" />
           </div>
