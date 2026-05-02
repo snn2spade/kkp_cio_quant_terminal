@@ -22,9 +22,9 @@ function PortfolioPage() {
         
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3 max-w-2xl mx-auto">
           {[
-            { label: 'Holdings', status: 'Planned', icon: '📊' },
-            { label: 'Performance', status: 'Planned', icon: '📈' },
-            { label: 'Risk Metrics', status: 'Planned', icon: '⚠' },
+            { label: 'Construction', status: 'Planned', icon: '📊' },
+            { label: 'Backtesting', status: 'Planned', icon: '📈' },
+            { label: 'Monitoring', status: 'Planned', icon: '⚠' },
           ].map((item, idx) => (
             <div key={idx} className="bg-cqt-elevated/50 rounded-lg p-4 border border-cqt-orange/20 hover:border-cqt-orange/30 transition-all">
               <div className="text-xl mb-2">{item.icon}</div>

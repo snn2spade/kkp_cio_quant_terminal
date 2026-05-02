@@ -1,6 +1,3 @@
-import ModuleG_Heatmap from '../components/modules/ModuleG_Heatmap'
-import ModuleF_TimeSeries2Axis from '../components/modules/ModuleF_TimeSeries2Axis'
-
 function DataPage() {
   return (
     <div className="p-4 max-w-[1800px] mx-auto">
@@ -15,25 +12,27 @@ function DataPage() {
           {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
         </div>
       </div>
-      
-      <div className="grid grid-cols-1 gap-4 mb-4">
-        <ModuleG_Heatmap title="Earning Revision Ratio Heatmap" />
-        <ModuleF_TimeSeries2Axis title="Bloomberg Estimate EPS vs Actual" />
-      </div>
-      
-      {/* Data Summary - Compact */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        {[
-          { label: 'Sources', value: '12', sub: 'Feeds', color: 'text-cqt-amber', border: 'border-cqt-amber/30' },
-          { label: 'Points', value: '1.2M', sub: 'Daily', color: 'text-cqt-amber', border: 'border-cqt-amber/30' },
-          { label: 'Update', value: 'Real-time', sub: 'Market hrs', color: 'text-cqt-amber', border: 'border-cqt-amber/30' },
-        ].map((stat, idx) => (
-          <div key={idx} className={`rounded-md p-3 border ${stat.border} bg-cqt-panel/60 backdrop-blur-sm`}>
-            <p className="text-[10px] text-cqt-text-muted uppercase tracking-wide">{stat.label}</p>
-            <p className={`text-xl font-bold font-mono ${stat.color} mt-1`}>{stat.value}</p>
-            <p className="text-[10px] text-cqt-text-muted mt-0.5">{stat.sub}</p>
-          </div>
-        ))}
+
+      <div className="module-card-amber text-center py-16 animate-fade-in">
+        <div className="text-4xl mb-4 opacity-50">◆</div>
+        <h3 className="text-xl font-semibold text-cqt-text-primary mb-2">Coming Soon</h3>
+        <p className="text-sm text-cqt-text-secondary max-w-md mx-auto leading-relaxed">
+          Aggregated data series, heatmaps, analytical visualizations, and data analytics will be available here soon.
+        </p>
+
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3 max-w-2xl mx-auto">
+          {[
+            { label: 'Heatmaps', status: 'Planned', icon: '🔥' },
+            { label: 'Time Series', status: 'Planned', icon: '📊' },
+            { label: 'Analytics', status: 'Planned', icon: '🧮' },
+          ].map((item, idx) => (
+            <div key={idx} className="bg-cqt-elevated/50 rounded-lg p-4 border border-cqt-amber/20 hover:border-cqt-amber/30 transition-all">
+              <div className="text-xl mb-2">{item.icon}</div>
+              <p className="text-xs font-medium text-cqt-text-primary">{item.label}</p>
+              <p className="text-[10px] text-cqt-amber mt-1 font-mono">{item.status}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

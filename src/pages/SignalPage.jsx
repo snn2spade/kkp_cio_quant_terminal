@@ -12,14 +12,14 @@ function SignalPage() {
           {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
         </div>
       </div>
-      
+
       <div className="module-card-purple text-center py-16 animate-fade-in">
         <div className="text-4xl mb-4 opacity-50">◈</div>
         <h3 className="text-xl font-semibold text-cqt-text-primary mb-2">Coming Soon</h3>
         <p className="text-sm text-cqt-text-secondary max-w-md mx-auto leading-relaxed">
-          Signal generation, technical indicators, and trading alerts will be available here soon.
+          Trading signals, technical indicators, and signal generation will be available here soon.
         </p>
-        
+
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3 max-w-2xl mx-auto">
           {[
             { label: 'Technical Signals', status: 'Planned', icon: '📊' },
