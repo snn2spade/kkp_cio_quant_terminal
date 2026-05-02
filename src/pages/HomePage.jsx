@@ -1,5 +1,4 @@
 import ModuleA_SummarizedInsights from '../components/modules/ModuleA_SummarizedInsights'
-import ModuleC_MarketHeadlines from '../components/modules/ModuleC_MarketHeadlines'
 import { insights } from '../data/mockData'
 
 function HomePage() {
@@ -20,7 +19,7 @@ function HomePage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
         <ModuleA_SummarizedInsights
           title="Latest Insights by House"
           insights={insightsByHouse}
@@ -31,19 +30,25 @@ function HomePage() {
           insights={insightsByAnalyst}
           themeColor="cqt-red"
         />
-        <ModuleC_MarketHeadlines />
       </div>
 
       {/* Quick Stats - Compact */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {[
-          { label: 'Active Analysts', value: '7', color: 'text-cqt-red', borderColor: 'border-cqt-red/30' },
-          { label: 'Research Houses', value: '6', color: 'text-cqt-blue', borderColor: 'border-cqt-blue/30' },
-          { label: 'Papers This Month', value: '24', color: 'text-cqt-green', borderColor: 'border-cqt-green/30' },
-          { label: 'Market Signals', value: '12', color: 'text-cqt-amber', borderColor: 'border-cqt-amber/30' },
+          { label: 'Tracking Analysts', value: '7', color: 'text-cqt-red', borderColor: 'border-cqt-red/30', live: true },
+          { label: 'Research Houses', value: '6', color: 'text-cqt-blue', borderColor: 'border-cqt-blue/30', live: true },
+          { label: 'New Papers This Month', value: '24', color: 'text-cqt-green', borderColor: 'border-cqt-green/30' },
         ].map((stat, idx) => (
           <div key={idx} className={`rounded-md p-3 border ${stat.borderColor} bg-cqt-panel/60 backdrop-blur-sm`}>
-            <p className={`text-xl font-bold font-mono ${stat.color}`}>{stat.value}</p>
+            <div className="flex items-center justify-between mb-1">
+              <p className={`text-xl font-bold font-mono ${stat.color}`}>{stat.value}</p>
+              {stat.live && (
+                <div className={`flex items-center space-x-1 ${stat.color.replace('text-', 'text-')}`}>
+                  <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${stat.color.replace('text-', 'bg-')}`}></div>
+                  <span className={`text-[9px] ${stat.color} font-mono`}>LIVE</span>
+                </div>
+              )}
+            </div>
             <p className="text-[10px] text-cqt-text-muted uppercase tracking-wide mt-0.5">{stat.label}</p>
           </div>
         ))}

@@ -15,11 +15,11 @@ const colorClasses = {
 const menuItems = [
   { path: '/', label: 'Home', icon: 'home', color: 'cqt-red' },
   { path: '/analysts', label: 'Analysts', icon: 'group', color: 'cqt-blue' },
-  { path: '/market', label: 'Market', icon: 'trending_up', color: 'cqt-green' },
+  { path: '/market', label: 'Market', icon: 'rss_feed', color: 'cqt-green' },
   { path: '/data', label: 'Data', icon: 'data_usage', color: 'cqt-amber' },
   { path: '/signal', label: 'Signal', icon: 'show_chart', color: 'cqt-purple' },
   { path: '/portfolio', label: 'Portfolio', icon: 'account_balance', color: 'cqt-orange' },
-  { path: '/workflow', label: 'Workflow', icon: 'check_circle', color: 'cqt-teal' },
+  { path: '/workflow', label: 'Workflow', icon: 'android', color: 'cqt-teal' },
 ]
 
 function Sidebar() {
