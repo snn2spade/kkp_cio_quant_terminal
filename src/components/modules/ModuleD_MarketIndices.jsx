@@ -1,10 +1,11 @@
-import { marketIndices } from '../../data/mockData'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
 
 function ModuleD_MarketIndices() {
   const getChangeColor = (change) => {
-    if (change > 0) return 'text-cqt-green'
-    if (change < 0) return 'text-cqt-red'
-    return 'text-cqt-text-muted'
+    if (change > 0) return 'text-emerald-500'
+    if (change < 0) return 'text-red-500'
+    return 'text-muted-foreground'
   }
 
   const formatChange = (change) => {
@@ -13,44 +14,48 @@ function ModuleD_MarketIndices() {
   }
 
   return (
-    <div className="module-card-green">
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-cqt-green">Market Indices</h3>
-        <span className="text-[10px] text-cqt-text-muted font-mono">Real-time</span>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Symbol</th>
-              <th>Name</th>
-              <th className="text-right">Last</th>
-              <th className="text-right">1D</th>
-              <th className="text-right">1M</th>
-              <th className="text-right">1Y</th>
-            </tr>
-          </thead>
-          <tbody>
-            {marketIndices.map((index) => (
-              <tr key={index.symbol} className="group">
-                <td className="font-mono text-xs font-medium text-cqt-green group-hover:text-white transition-colors">{index.symbol}</td>
-                <td className="text-xs text-cqt-text-primary">{index.name}</td>
-                <td className="text-right font-mono text-xs text-cqt-text-primary">{index.last.toLocaleString()}</td>
-                <td className={`text-right font-mono text-xs ${getChangeColor(index.change1D)}`}>
-                  {formatChange(index.change1D)}
-                </td>
-                <td className={`text-right font-mono text-xs ${getChangeColor(index.change1M)}`}>
-                  {formatChange(index.change1M)}
-                </td>
-                <td className={`text-right font-mono text-xs ${getChangeColor(index.change1Y)}`}>
-                  {formatChange(index.change1Y)}
-                </td>
+    <Card className="backdrop-blur-xl bg-card/50 border-emerald-500/20 hover:border-emerald-500/40 shadow-lg transition-all duration-300">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-sm font-semibold text-emerald-500">Market Indices</CardTitle>
+          <span className="text-[10px] text-muted-foreground font-mono">Real-time</span>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border/30">
+                <th className="text-left text-[10px] text-muted-foreground font-medium uppercase tracking-wider pb-2">Symbol</th>
+                <th className="text-left text-[10px] text-muted-foreground font-medium uppercase tracking-wider pb-2">Name</th>
+                <th className="text-right text-[10px] text-muted-foreground font-medium uppercase tracking-wider pb-2">Last</th>
+                <th className="text-right text-[10px] text-muted-foreground font-medium uppercase tracking-wider pb-2">1D</th>
+                <th className="text-right text-[10px] text-muted-foreground font-medium uppercase tracking-wider pb-2">1M</th>
+                <th className="text-right text-[10px] text-muted-foreground font-medium uppercase tracking-wider pb-2">1Y</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+            </thead>
+            <tbody>
+              {marketIndices.map((index) => (
+                <tr key={index.symbol} className="group border-b border-border/10 last:border-0 hover:bg-muted/30 transition-colors">
+                  <td className="py-2 font-mono text-xs font-medium text-emerald-500 group-hover:text-emerald-400 transition-colors">{index.symbol}</td>
+                  <td className="py-2 text-xs text-foreground/90">{index.name}</td>
+                  <td className="py-2 text-right font-mono text-xs text-foreground/90">{index.last.toLocaleString()}</td>
+                  <td className={cn("py-2 text-right font-mono text-xs", getChangeColor(index.change1D))}>
+                    {formatChange(index.change1D)}
+                  </td>
+                  <td className={cn("py-2 text-right font-mono text-xs", getChangeColor(index.change1M))}>
+                    {formatChange(index.change1M)}
+                  </td>
+                  <td className={cn("py-2 text-right font-mono text-xs", getChangeColor(index.change1Y))}>
+                    {formatChange(index.change1Y)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 

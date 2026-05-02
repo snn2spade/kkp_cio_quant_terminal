@@ -1,54 +1,51 @@
 import { useState } from 'react'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { ChevronDown } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const themeStyles = {
   'cqt-red': {
-    title: 'text-cqt-red',
-    badge: 'text-cqt-red bg-cqt-red/10 border-cqt-red/20',
-    card: 'border-cqt-red/10 hover:border-cqt-red/30',
-    pill: 'text-cqt-red bg-cqt-red/10',
-    icon: 'text-cqt-red/50',
+    title: 'text-red-500',
+    badge: 'border-red-500/30 bg-red-500/10 text-red-500',
+    card: 'border-red-500/20 hover:border-red-500/40 hover:bg-red-500/5',
+    pill: 'bg-red-500/10 text-red-500',
   },
   'cqt-blue': {
-    title: 'text-cqt-blue',
-    badge: 'text-cqt-blue bg-cqt-blue/10 border-cqt-blue/20',
-    card: 'border-cqt-blue/10 hover:border-cqt-blue/30',
-    pill: 'text-cqt-blue bg-cqt-blue/10',
-    icon: 'text-cqt-blue/50',
+    title: 'text-blue-500',
+    badge: 'border-blue-500/30 bg-blue-500/10 text-blue-500',
+    card: 'border-blue-500/20 hover:border-blue-500/40 hover:bg-blue-500/5',
+    pill: 'bg-blue-500/10 text-blue-500',
   },
   'cqt-green': {
-    title: 'text-cqt-green',
-    badge: 'text-cqt-green bg-cqt-green/10 border-cqt-green/20',
-    card: 'border-cqt-green/10 hover:border-cqt-green/30',
-    pill: 'text-cqt-green bg-cqt-green/10',
-    icon: 'text-cqt-green/50',
+    title: 'text-emerald-500',
+    badge: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-500',
+    card: 'border-emerald-500/20 hover:border-emerald-500/40 hover:bg-emerald-500/5',
+    pill: 'bg-emerald-500/10 text-emerald-500',
   },
   'cqt-amber': {
-    title: 'text-cqt-amber',
-    badge: 'text-cqt-amber bg-cqt-amber/10 border-cqt-amber/20',
-    card: 'border-cqt-amber/10 hover:border-cqt-amber/30',
-    pill: 'text-cqt-amber bg-cqt-amber/10',
-    icon: 'text-cqt-amber/50',
+    title: 'text-amber-500',
+    badge: 'border-amber-500/30 bg-amber-500/10 text-amber-500',
+    card: 'border-amber-500/20 hover:border-amber-500/40 hover:bg-amber-500/5',
+    pill: 'bg-amber-500/10 text-amber-500',
   },
   'cqt-purple': {
-    title: 'text-cqt-purple',
-    badge: 'text-cqt-purple bg-cqt-purple/10 border-cqt-purple/20',
-    card: 'border-cqt-purple/10 hover:border-cqt-purple/30',
-    pill: 'text-cqt-purple bg-cqt-purple/10',
-    icon: 'text-cqt-purple/50',
+    title: 'text-violet-500',
+    badge: 'border-violet-500/30 bg-violet-500/10 text-violet-500',
+    card: 'border-violet-500/20 hover:border-violet-500/40 hover:bg-violet-500/5',
+    pill: 'bg-violet-500/10 text-violet-500',
   },
   'cqt-orange': {
-    title: 'text-cqt-orange',
-    badge: 'text-cqt-orange bg-cqt-orange/10 border-cqt-orange/20',
-    card: 'border-cqt-orange/10 hover:border-cqt-orange/30',
-    pill: 'text-cqt-orange bg-cqt-orange/10',
-    icon: 'text-cqt-orange/50',
+    title: 'text-orange-500',
+    badge: 'border-orange-500/30 bg-orange-500/10 text-orange-500',
+    card: 'border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/5',
+    pill: 'bg-orange-500/10 text-orange-500',
   },
   'cqt-teal': {
-    title: 'text-cqt-teal',
-    badge: 'text-cqt-teal bg-cqt-teal/10 border-cqt-teal/20',
-    card: 'border-cqt-teal/10 hover:border-cqt-teal/30',
-    pill: 'text-cqt-teal bg-cqt-teal/10',
-    icon: 'text-cqt-teal/50',
+    title: 'text-teal-500',
+    badge: 'border-teal-500/30 bg-teal-500/10 text-teal-500',
+    card: 'border-teal-500/20 hover:border-teal-500/40 hover:bg-teal-500/5',
+    pill: 'bg-teal-500/10 text-teal-500',
   },
 }
 
@@ -57,43 +54,55 @@ function ModuleA_SummarizedInsights({ title, insights, themeColor = 'cqt-blue' }
   const styles = themeStyles[themeColor] || themeStyles['cqt-blue']
 
   return (
-    <div className={`module-card-${themeColor}`}>
-      <div className="flex items-center justify-between mb-3">
-        <h3 className={`text-sm font-semibold ${styles.title}`}>{title}</h3>
-        <span className={`text-[10px] font-mono ${styles.title}/70 px-2 py-0.5 rounded border ${styles.badge}`}>
-          {insights.length}
-        </span>
-      </div>
-      <div className="space-y-2 max-h-80 overflow-y-auto pr-1">
-        {insights.map((insight) => (
-          <div
-            key={insight.id}
-            className={`p-3 bg-cqt-elevated/50 rounded-md border ${styles.card} cursor-pointer transition-all duration-150`}
-            onClick={() => setExpandedId(expandedId === insight.id ? null : insight.id)}
-          >
-            <div className="flex items-center justify-between mb-2">
-              <span className={`text-[10px] font-medium ${styles.pill} px-2 py-0.5 rounded`}>
-                {insight.house}
-              </span>
-              <span className="text-[10px] text-cqt-text-muted font-mono">{insight.date}</span>
-            </div>
-            <p className="text-xs text-cqt-text-primary leading-relaxed mb-1.5 line-clamp-2">{insight.text}</p>
-            <div className="flex items-center justify-between">
-              <p className="text-[10px] text-cqt-text-muted">Analyst: <span className="text-cqt-text-secondary">{insight.analyst}</span></p>
-              <svg className={`w-3 h-3 ${styles.icon} transition-transform ${expandedId === insight.id ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
-            
-            {expandedId === insight.id && (
-              <div className="mt-3 pt-3 border-t border-cqt-border/50 animate-fade-in">
-                <p className="text-[10px] text-cqt-text-muted leading-relaxed">Full analysis would be displayed here with detailed charts and data visualizations.</p>
+    <Card className={cn("backdrop-blur-xl bg-card/50 shadow-lg transition-all duration-300", styles.card)}>
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between">
+          <CardTitle className={cn("text-sm font-semibold", styles.title)}>{title}</CardTitle>
+          <Badge variant="outline" className={cn("text-[10px] font-mono", styles.badge)}>
+            {insights.length}
+          </Badge>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-2 max-h-80 overflow-y-auto pr-1">
+          {insights.map((insight) => (
+            <div
+              key={insight.id}
+              className={cn(
+                "p-3 bg-muted/30 rounded-lg border cursor-pointer transition-all duration-200",
+                styles.card
+              )}
+              onClick={() => setExpandedId(expandedId === insight.id ? null : insight.id)}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <Badge variant="secondary" className={cn("text-[10px] font-medium", styles.pill)}>
+                  {insight.house}
+                </Badge>
+                <span className="text-[10px] text-muted-foreground font-mono">{insight.date}</span>
               </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
+              <p className="text-xs text-foreground/90 leading-relaxed mb-1.5 line-clamp-2">{insight.text}</p>
+              <div className="flex items-center justify-between">
+                <p className="text-[10px] text-muted-foreground">
+                  Analyst: <span className="text-foreground/80">{insight.analyst}</span>
+                </p>
+                <ChevronDown className={cn(
+                  "w-3 h-3 text-muted-foreground transition-transform duration-200",
+                  expandedId === insight.id && "rotate-180"
+                )} />
+              </div>
+
+              {expandedId === insight.id && (
+                <div className="mt-3 pt-3 border-t border-border/50 animate-fade-in">
+                  <p className="text-[10px] text-muted-foreground leading-relaxed">
+                    Full analysis would be displayed here with detailed charts and data visualizations.
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 

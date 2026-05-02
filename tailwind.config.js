@@ -7,46 +7,78 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Deep blue theme with glassmorphism
-        'cqt-bg': '#0a0e22',           // Deep blue background
-        'cqt-surface': '#0f1428',       // Blue-tinted surface
-        'cqt-panel': 'rgba(15, 25, 50, 0.25)',  // Glass panel with blue tint
-        'cqt-elevated': '#1a2847',      // Elevated surfaces with blue tone
+        // Shadcn CSS variable mappings
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
 
-        // Borders with blue tint
-        'cqt-border': 'rgba(59, 130, 246, 0.25)',      // Blue border
-        'cqt-border-light': 'rgba(59, 130, 246, 0.5)', // Lighter blue border
+        // CQT custom colors (keeping for backward compatibility during transition)
+        'cqt-bg': 'hsl(var(--background))',
+        'cqt-surface': 'hsl(var(--card))',
+        'cqt-panel': 'hsl(var(--card) / 0.5)',
+        'cqt-elevated': 'hsl(var(--muted))',
 
-        // Neon accent colors (fintech style)
-        'cqt-accent': '#3b82f6',        // Bright blue - primary accent
-        'cqt-glow': '#60a5fa',          // Lighter blue for glows
-        'cqt-neon': '#06b6d4',          // Cyan neon accent
+        'cqt-border': 'hsl(var(--border))',
+        'cqt-border-light': 'hsl(var(--border))',
 
-        // Functional colors (vibrant for fintech)
-        'cqt-red': '#ef4444',           // Red → Homepage
-        'cqt-blue': '#3b82f6',          // Blue → Analysts
-        'cqt-green': '#10b981',         // Green → Market
-        'cqt-amber': '#f59e0b',         // Amber/Yellow → Data
-        'cqt-purple': '#8b5cf6',        // Purple → Signal
-        'cqt-orange': '#f97316',        // Orange → Portfolio
-        'cqt-teal': '#14b8a6',          // Teal → Workflow
+        'cqt-accent': 'hsl(var(--primary))',
+        'cqt-glow': 'hsl(var(--primary) / 0.8)',
+        'cqt-neon': 'hsl(var(--accent))',
 
-        // Text colors (high contrast for dense info)
-        'cqt-text-primary': '#f1f5f9',   // Bright white-blue
-        'cqt-text-secondary': '#cbd5e1', // Light gray-blue
-        'cqt-text-muted': '#64748b',     // Muted blue-gray
+        // Functional colors
+        'cqt-red': '#ef4444',
+        'cqt-blue': 'hsl(var(--primary))',
+        'cqt-green': '#10b981',
+        'cqt-amber': '#f59e0b',
+        'cqt-purple': '#8b5cf6',
+        'cqt-orange': '#f97316',
+        'cqt-teal': '#14b8a6',
+
+        'cqt-text-primary': 'hsl(var(--foreground))',
+        'cqt-text-secondary': 'hsl(var(--muted-foreground))',
+        'cqt-text-muted': 'hsl(var(--muted-foreground) / 0.7)',
       },
       fontFamily: {
-        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        'sans': ['"Geist Variable"', 'system-ui', '-apple-system', 'sans-serif'],
         'mono': ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
-        'display': ['Inter', 'system-ui', 'sans-serif'],
+        'display': ['"Geist Variable"', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         'card': '0 8px 32px 0 rgba(31, 38, 135, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
         'card-hover': '0 8px 32px 0 rgba(31, 38, 135, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
-        'glow-subtle': '0 0 10px rgba(59, 130, 246, 0.15)',
-        'glow-accent': '0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.1)',
-        'glow-neon': '0 0 10px rgba(6, 182, 212, 0.4), 0 0 30px rgba(6, 182, 212, 0.2)',
+        'glow-subtle': '0 0 10px hsl(var(--primary) / 0.15)',
+        'glow-accent': '0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.1)',
+        'glow-neon': '0 0 10px hsl(var(--accent) / 0.4), 0 0 30px hsl(var(--accent) / 0.2)',
       },
       backdropBlur: {
         'xs': '2px',
@@ -56,6 +88,8 @@ export default {
         'slide-up': 'slideUp 0.3s ease-out',
         'slide-text': 'slideInText 0.4s ease-out forwards',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'shimmer': 'shimmer 2s linear infinite',
+        'gradient': 'gradient 3s ease infinite',
       },
       keyframes: {
         fadeIn: {
@@ -70,6 +104,19 @@ export default {
           '0%': { opacity: '0', transform: 'translateX(-10px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        gradient: {
+          '0%, 100%': { backgroundSize: '200% 200%', backgroundPosition: 'left center' },
+          '50%': { backgroundSize: '200% 200%', backgroundPosition: 'right center' },
+        },
+      },
+      borderRadius: {
+        'lg': 'var(--radius)',
+        'md': 'calc(var(--radius) - 2px)',
+        'sm': 'calc(var(--radius) - 4px)',
       },
     },
   },
