@@ -7,7 +7,7 @@ function DataPage() {
       <div className="flex items-end justify-between mb-4">
         <div>
           <h2 className="text-lg font-semibold text-cqt-text-primary">
-            <span className="text-cqt-amber">Data</span> Analytics
+            <span className="text-cqt-amber">Data</span> & Analytics
           </h2>
           <p className="text-[11px] text-cqt-text-muted mt-0.5">Aggregated data series, heatmaps, and analytical visualizations</p>
         </div>

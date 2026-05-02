@@ -4,7 +4,7 @@ function PortfolioPage() {
       <div className="flex items-end justify-between mb-4">
         <div>
           <h2 className="text-lg font-semibold text-cqt-text-primary">
-            <span className="text-cqt-orange">Portfolio</span> Management
+            <span className="text-cqt-orange">Portfolio</span> & Performance
           </h2>
           <p className="text-[11px] text-cqt-text-muted mt-0.5">Track and analyze portfolio performance</p>
         </div>

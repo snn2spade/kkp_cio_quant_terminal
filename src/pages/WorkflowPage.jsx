@@ -4,7 +4,7 @@ function WorkflowPage() {
       <div className="flex items-end justify-between mb-4">
         <div>
           <h2 className="text-lg font-semibold text-cqt-text-primary">
-            <span className="text-cqt-teal">Workflow</span> Automation
+            <span className="text-cqt-teal">Workflow</span> & AI Automation
           </h2>
           <p className="text-[11px] text-cqt-text-muted mt-0.5">Automated workflows and process management</p>
         </div>

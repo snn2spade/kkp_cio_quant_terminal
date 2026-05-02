@@ -4,7 +4,7 @@ function SignalPage() {
       <div className="flex items-end justify-between mb-4">
         <div>
           <h2 className="text-lg font-semibold text-cqt-text-primary">
-            <span className="text-cqt-purple">Signal</span> Generation
+            <span className="text-cqt-purple">Signal</span> & Ideas Generation
           </h2>
           <p className="text-[11px] text-cqt-text-muted mt-0.5">Trading signals and technical indicators</p>
         </div>

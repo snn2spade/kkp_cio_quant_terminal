@@ -11,7 +11,7 @@ function HomePage() {
       <div className="flex items-end justify-between mb-4">
         <div>
           <h2 className="text-lg font-semibold text-cqt-text-primary">
-            <span className="text-cqt-red">Dashboard</span> Overview
+            <span className="text-cqt-red">Dashboard</span> & Overview
           </h2>
           <p className="text-[11px] text-cqt-text-muted mt-0.5">Summarized insights from analysts and market data</p>
         </div>
