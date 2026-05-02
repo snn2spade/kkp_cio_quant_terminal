@@ -42,20 +42,7 @@ export default {
           foreground: 'hsl(var(--card-foreground))',
         },
 
-        // CQT custom colors (keeping for backward compatibility during transition)
-        'cqt-bg': 'hsl(var(--background))',
-        'cqt-surface': 'hsl(var(--card))',
-        'cqt-panel': 'hsl(var(--card) / 0.5)',
-        'cqt-elevated': 'hsl(var(--muted))',
-
-        'cqt-border': 'hsl(var(--border))',
-        'cqt-border-light': 'hsl(var(--border))',
-
-        'cqt-accent': 'hsl(var(--primary))',
-        'cqt-glow': 'hsl(var(--primary) / 0.8)',
-        'cqt-neon': 'hsl(var(--accent))',
-
-        // Functional colors
+        // Functional colors (keeping for themeStyles mapping)
         'cqt-red': '#ef4444',
         'cqt-blue': 'hsl(var(--primary))',
         'cqt-green': '#10b981',
@@ -63,10 +50,6 @@ export default {
         'cqt-purple': '#8b5cf6',
         'cqt-orange': '#f97316',
         'cqt-teal': '#14b8a6',
-
-        'cqt-text-primary': 'hsl(var(--foreground))',
-        'cqt-text-secondary': 'hsl(var(--muted-foreground))',
-        'cqt-text-muted': 'hsl(var(--muted-foreground) / 0.7)',
       },
       fontFamily: {
         'sans': ['"Geist Variable"', 'system-ui', '-apple-system', 'sans-serif'],

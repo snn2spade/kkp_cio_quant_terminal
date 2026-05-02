@@ -18,23 +18,23 @@ import {
 } from 'lucide-react'
 
 const menuItems = [
-  { path: '/', label: 'Home', icon: Home, color: 'cqt-red' },
-  { path: '/analysts', label: 'Analysts', icon: Users, color: 'cqt-blue' },
-  { path: '/market', label: 'Market', icon: Rss, color: 'cqt-green' },
-  { path: '/data', label: 'Data', icon: Database, color: 'cqt-amber' },
-  { path: '/signal', label: 'Signal', icon: TrendingUp, color: 'cqt-purple' },
-  { path: '/portfolio', label: 'Portfolio', icon: Building2, color: 'cqt-orange' },
-  { path: '/workflow', label: 'Workflow', icon: Workflow, color: 'cqt-teal' },
+  { path: '/', label: 'Home', icon: Home, color: 'red' },
+  { path: '/analysts', label: 'Analysts', icon: Users, color: 'blue' },
+  { path: '/market', label: 'Market', icon: Rss, color: 'emerald' },
+  { path: '/data', label: 'Data', icon: Database, color: 'amber' },
+  { path: '/signal', label: 'Signal', icon: TrendingUp, color: 'violet' },
+  { path: '/portfolio', label: 'Portfolio', icon: Building2, color: 'orange' },
+  { path: '/workflow', label: 'Workflow', icon: Workflow, color: 'teal' },
 ]
 
 const colorMap = {
-  'cqt-red': 'text-red-500 bg-red-500/10 border-red-500/20',
-  'cqt-blue': 'text-blue-500 bg-blue-500/10 border-blue-500/20',
-  'cqt-green': 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
-  'cqt-amber': 'text-amber-500 bg-amber-500/10 border-amber-500/20',
-  'cqt-purple': 'text-violet-500 bg-violet-500/10 border-violet-500/20',
-  'cqt-orange': 'text-orange-500 bg-orange-500/10 border-orange-500/20',
-  'cqt-teal': 'text-teal-500 bg-teal-500/10 border-teal-500/20',
+  'red': 'text-red-500 bg-red-500/10 border-red-500/20',
+  'blue': 'text-blue-500 bg-blue-500/10 border-blue-500/20',
+  'emerald': 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
+  'amber': 'text-amber-500 bg-amber-500/10 border-amber-500/20',
+  'violet': 'text-violet-500 bg-violet-500/10 border-violet-500/20',
+  'orange': 'text-orange-500 bg-orange-500/10 border-orange-500/20',
+  'teal': 'text-teal-500 bg-teal-500/10 border-teal-500/20',
 }
 
 function Sidebar() {
