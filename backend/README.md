@@ -1,0 +1,66 @@
+# CIO Quant Terminal - Backend API
+
+FastAPI backend for the CIO Quant Terminal application.
+
+## Setup
+
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Running the Backend
+
+### Development mode (with auto-reload):
+```bash
+python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+### Or use the npm script from root:
+```bash
+npm run backend
+```
+
+## API Endpoints
+
+### Market Data
+- `GET /api/market-indices` - Get market indices data
+- `GET /api/market-headlines` - Get market headlines
+
+### Insights
+- `GET /api/insights` - Get all insights
+- `GET /api/insights/by-house/{house}` - Get insights by research house
+- `GET /api/insights/by-analyst/{analyst}` - Get insights by analyst
+
+### Reference Data
+- `GET /api/analysts` - Get list of analysts
+- `GET /api/houses` - Get list of research houses
+
+### Time Series & Heatmap
+- `GET /api/time-series` - Get time series data
+- `GET /api/heatmap` - Get heatmap data
+
+### Papers
+- `GET /api/papers` - Get all papers
+- `GET /api/papers/search?house=&analyst=&start_date=&end_date=` - Search papers with filters
+
+## API Documentation
+
+FastAPI automatically generates interactive API documentation:
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
+
+## CORS Configuration
+
+The backend is configured to accept requests from:
+- http://localhost:5173 (Vite default)
+- http://127.0.0.1:5173
+
+## Data Source
+
+Currently using mock data from `data.py`. In production, this will be replaced with actual database queries or external API calls.

@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Zap } from 'lucide-react'
-import { papers, analysts, houses } from '../../data/mockData'
+import apiService from '../../lib/api'
 
 function ModuleB_AskSearchPapers() {
   const [question, setQuestion] = useState('')
@@ -13,26 +13,45 @@ function ModuleB_AskSearchPapers() {
   const [selectedAnalysts, setSelectedAnalysts] = useState([])
   const [searchResults, setSearchResults] = useState([])
   const [answer, setAnswer] = useState('')
+  const [papers, setPapers] = useState([])
+  const [analysts, setAnalysts] = useState([])
+  const [houses, setHouses] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const handleSearch = () => {
-    let results = [...papers]
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [papersData, analystsData, housesData] = await Promise.all([
+          apiService.getPapers(),
+          apiService.getAnalysts(),
+          apiService.getHouses()
+        ])
+        setPapers(papersData)
+        setAnalysts(analystsData)
+        setHouses(housesData)
+      } catch (error) {
+        console.error('Failed to fetch data:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
 
-    if (dateRange.start) {
-      results = results.filter(p => p.date >= dateRange.start)
-    }
-    if (dateRange.end) {
-      results = results.filter(p => p.date <= dateRange.end)
-    }
-    if (selectedHouses.length > 0) {
-      results = results.filter(p => selectedHouses.includes(p.house))
-    }
-    if (selectedAnalysts.length > 0) {
-      results = results.filter(p => selectedAnalysts.some(a => p.authors.includes(a)))
-    }
-
-    setSearchResults(results)
-    if (question && results.length > 0) {
-      setAnswer(`Based on ${results.length} documents found, the analysis suggests continued market optimism with strong tech sector performance. Key insights from ${results[0].house} indicate... [Reference: ${results[0].title}, Page 12]`)
+  const handleSearch = async () => {
+    try {
+      const results = await apiService.searchPapers({
+        house: selectedHouses.length > 0 ? selectedHouses[0] : null,
+        analyst: selectedAnalysts.length > 0 ? selectedAnalysts[0] : null,
+        start_date: dateRange.start || null,
+        end_date: dateRange.end || null
+      })
+      setSearchResults(results)
+      if (question && results.length > 0) {
+        setAnswer(`Based on ${results.length} documents found, the analysis suggests continued market optimism with strong tech sector performance. Key insights from ${results[0].house} indicate... [Reference: ${results[0].title}, Page 12]`)
+      }
+    } catch (error) {
+      console.error('Search failed:', error)
     }
   }
 
@@ -42,6 +61,16 @@ function ModuleB_AskSearchPapers() {
     } else {
       setSelected([...selected, item])
     }
+  }
+
+  if (loading) {
+    return (
+      <Card className="backdrop-blur-xl bg-card/50 border-blue-500/20 shadow-lg">
+        <CardContent className="p-6 text-center text-muted-foreground text-xs">
+          Loading papers data...
+        </CardContent>
+      </Card>
+    )
   }
 
   return (

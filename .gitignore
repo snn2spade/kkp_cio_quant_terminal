@@ -75,3 +75,4 @@ logs/
 # pnpm-lock.yaml
 
 venv/
+*.pyc

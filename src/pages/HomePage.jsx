@@ -1,12 +1,34 @@
+import { useState, useEffect } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import ModuleA_SummarizedInsights from '../components/modules/ModuleA_SummarizedInsights'
-import { insights } from '../data/mockData'
+import apiService from '@/lib/api'
 import { cn } from '@/lib/utils'
 
 function HomePage() {
+  const [insights, setInsights] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchInsights = async () => {
+      try {
+        const data = await apiService.getInsights()
+        setInsights(data)
+      } catch (error) {
+        console.error('Failed to fetch insights:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchInsights()
+  }, [])
+
   const insightsByHouse = insights.filter(i => ['Goldman Sachs', 'Morgan Stanley', 'JP Morgan', 'Barclays'].includes(i.house))
   const insightsByAnalyst = insights.filter(i => ['John Smith', 'Sarah Johnson', 'Michael Chen'].includes(i.analyst))
+
+  if (loading) {
+    return <div className="p-4 text-muted-foreground">Loading insights...</div>
+  }
 
   return (
     <div className="p-4 max-w-[1800px] mx-auto animate-fade-in">
