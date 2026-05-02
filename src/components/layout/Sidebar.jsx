@@ -24,7 +24,7 @@ const menuItems = [
   { path: '/data', label: 'Data', icon: Database, color: 'amber' },
   { path: '/signal', label: 'Signal', icon: TrendingUp, color: 'violet' },
   { path: '/portfolio', label: 'Portfolio', icon: Building2, color: 'orange' },
-  { path: '/workflow', label: 'Workflow', icon: Workflow, color: 'teal' },
+  { path: '/workflow', label: 'Workflow', icon: Workflow, color: 'fuchsia' },
 ]
 
 const colorMap = {
@@ -34,7 +34,7 @@ const colorMap = {
   'amber': 'text-amber-500 bg-amber-500/10 border-amber-500/20',
   'violet': 'text-violet-500 bg-violet-500/10 border-violet-500/20',
   'orange': 'text-orange-500 bg-orange-500/10 border-orange-500/20',
-  'teal': 'text-teal-500 bg-teal-500/10 border-teal-500/20',
+  'fuchsia': 'text-fuchsia-500 bg-fuchsia-500/10 border-fuchsia-500/20',
 }
 
 function Sidebar() {

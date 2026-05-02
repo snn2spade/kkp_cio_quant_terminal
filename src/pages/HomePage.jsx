@@ -26,12 +26,12 @@ function HomePage() {
         <ModuleA_SummarizedInsights
           title="Latest Insights by House"
           insights={insightsByHouse}
-          themeColor="cqt-red"
+          themeColor="red"
         />
         <ModuleA_SummarizedInsights
           title="Latest Insights by Analyst"
           insights={insightsByAnalyst}
-          themeColor="cqt-red"
+          themeColor="red"
         />
       </div>
 

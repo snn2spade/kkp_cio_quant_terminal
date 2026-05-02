@@ -5,53 +5,53 @@ import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const themeStyles = {
-  'cqt-red': {
+  'red': {
     title: 'text-red-500',
     badge: 'border-red-500/30 bg-red-500/10 text-red-500',
     card: 'border-red-500/20 hover:border-red-500/40 hover:bg-red-500/5',
     pill: 'bg-red-500/10 text-red-500',
   },
-  'cqt-blue': {
+  'blue': {
     title: 'text-blue-500',
     badge: 'border-blue-500/30 bg-blue-500/10 text-blue-500',
     card: 'border-blue-500/20 hover:border-blue-500/40 hover:bg-blue-500/5',
     pill: 'bg-blue-500/10 text-blue-500',
   },
-  'cqt-green': {
+  'emerald': {
     title: 'text-emerald-500',
     badge: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-500',
     card: 'border-emerald-500/20 hover:border-emerald-500/40 hover:bg-emerald-500/5',
     pill: 'bg-emerald-500/10 text-emerald-500',
   },
-  'cqt-amber': {
+  'amber': {
     title: 'text-amber-500',
     badge: 'border-amber-500/30 bg-amber-500/10 text-amber-500',
     card: 'border-amber-500/20 hover:border-amber-500/40 hover:bg-amber-500/5',
     pill: 'bg-amber-500/10 text-amber-500',
   },
-  'cqt-purple': {
+  'violet': {
     title: 'text-violet-500',
     badge: 'border-violet-500/30 bg-violet-500/10 text-violet-500',
     card: 'border-violet-500/20 hover:border-violet-500/40 hover:bg-violet-500/5',
     pill: 'bg-violet-500/10 text-violet-500',
   },
-  'cqt-orange': {
+  'orange': {
     title: 'text-orange-500',
     badge: 'border-orange-500/30 bg-orange-500/10 text-orange-500',
     card: 'border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/5',
     pill: 'bg-orange-500/10 text-orange-500',
   },
-  'cqt-teal': {
-    title: 'text-teal-500',
-    badge: 'border-teal-500/30 bg-teal-500/10 text-teal-500',
-    card: 'border-teal-500/20 hover:border-teal-500/40 hover:bg-teal-500/5',
-    pill: 'bg-teal-500/10 text-teal-500',
+  'fuchsia': {
+    title: 'text-fuchsia-500',
+    badge: 'border-fuchsia-500/30 bg-fuchsia-500/10 text-fuchsia-500',
+    card: 'border-fuchsia-500/20 hover:border-fuchsia-500/40 hover:bg-fuchsia-500/5',
+    pill: 'bg-fuchsia-500/10 text-fuchsia-500',
   },
 }
 
-function ModuleA_SummarizedInsights({ title, insights, themeColor = 'cqt-blue' }) {
+function ModuleA_SummarizedInsights({ title, insights, themeColor = 'blue' }) {
   const [expandedId, setExpandedId] = useState(null)
-  const styles = themeStyles[themeColor] || themeStyles['cqt-blue']
+  const styles = themeStyles[themeColor] || themeStyles['blue']
 
   return (
     <Card className={cn("backdrop-blur-xl bg-card/50 shadow-lg transition-all duration-300", styles.card)}>

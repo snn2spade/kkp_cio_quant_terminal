@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 interface UnderConstructionProps {
   title: string
   description: string
-  color?: 'red' | 'blue' | 'emerald' | 'amber' | 'violet' | 'orange' | 'teal'
+  color?: 'red' | 'blue' | 'emerald' | 'amber' | 'violet' | 'orange' | 'fuchsia'
   items?: Array<{
     label: string
     status: string
@@ -20,7 +20,7 @@ const colorMap = {
   amber: 'text-amber-500 border-amber-500/20 bg-amber-500/5',
   violet: 'text-violet-500 border-violet-500/20 bg-violet-500/5',
   orange: 'text-orange-500 border-orange-500/20 bg-orange-500/5',
-  teal: 'text-teal-500 border-teal-500/20 bg-teal-500/5',
+  fuchsia: 'text-fuchsia-500 border-fuchsia-500/20 bg-fuchsia-500/5',
 }
 
 const statusColorMap = {
@@ -30,7 +30,7 @@ const statusColorMap = {
   amber: 'text-amber-500',
   violet: 'text-violet-500',
   orange: 'text-orange-500',
-  teal: 'text-teal-500',
+  fuchsia: 'text-fuchsia-500',
 }
 
 export function UnderConstruction({
