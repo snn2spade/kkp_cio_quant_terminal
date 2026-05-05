@@ -10,6 +10,8 @@ export default defineConfig({
     },
   },
   server: {
+    host: true,
+    allowedHosts: ['ptsecwpcgc5010'],
     port: 3000,
     open: true
   }
