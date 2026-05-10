@@ -7,9 +7,9 @@ All notable changes to this project will be documented in this file.
 ### v0.3.0-dev - Edit here/ To be released
 
 - Added
-    - xxx 
+    - Feature-driven backend package structure with market, analysts, and data routers.
 - Changed
-    - xxx 
+    - Moved backend mock data into `app/shared/mock_data.py` and kept `main.py` as the compatibility entrypoint.
 - Fixed
     - xxx 
 

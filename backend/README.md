@@ -35,6 +35,21 @@ python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
 - driven by features
    - see project overview from kkp_cio_quant_terminal\README.md
 
+```txt
+backend/
+|-- app/
+|   |-- core/              # shared app configuration
+|   |-- features/          # feature-owned API routes
+|   |   |-- analysts/
+|   |   |-- data/
+|   |   `-- market/
+|   |-- shared/            # shared temporary data/utilities
+|   `-- main.py            # FastAPI app factory
+|-- main.py                # compatibility entrypoint for uvicorn main:app
+|-- requirements.txt
+`-- README.md
+```
+
 ## API Endpoints
 
 ### Market Data
@@ -72,4 +87,4 @@ The backend is configured to accept requests from:
 
 ## Data Source
 
-Currently using mock data from `data.py`. In production, this will be replaced with actual database queries or external API calls.
+Currently using mock data from `app/shared/mock_data.py`. In production, this will be replaced with feature-owned database queries or external API clients.

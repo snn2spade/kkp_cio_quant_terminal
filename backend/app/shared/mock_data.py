@@ -1,4 +1,4 @@
-# Mock data for CIO Quant Terminal (moved from frontend)
+# Mock data for CIO Quant Terminal.
 
 market_indices = [
     {"symbol": "SPX", "name": "S&P 500", "last": 4521.23, "change1D": 1.2, "change1M": -2.3, "change1Y": 15.4},
@@ -28,11 +28,22 @@ insights = [
 ]
 
 analysts = [
-    "John Smith", "Sarah Johnson", "Michael Chen", "Emily Davis", "Robert Wilson", "Lisa Anderson", "David Kim"
+    "John Smith",
+    "Sarah Johnson",
+    "Michael Chen",
+    "Emily Davis",
+    "Robert Wilson",
+    "Lisa Anderson",
+    "David Kim",
 ]
 
 houses = [
-    "Goldman Sachs", "Morgan Stanley", "JP Morgan", "Barclays", "Credit Suisse", "Deutsche Bank"
+    "Goldman Sachs",
+    "Morgan Stanley",
+    "JP Morgan",
+    "Barclays",
+    "Credit Suisse",
+    "Deutsche Bank",
 ]
 
 time_series_data = [
