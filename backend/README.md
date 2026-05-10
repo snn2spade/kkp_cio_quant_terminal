@@ -31,6 +31,10 @@ FastAPI backend for the CIO Quant Terminal application.
 python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
+## Project structures
+- driven by features
+   - see project overview from kkp_cio_quant_terminal\README.md
+
 ## API Endpoints
 
 ### Market Data
