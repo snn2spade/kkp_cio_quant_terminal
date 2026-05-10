@@ -1,0 +1,47 @@
+name: kkp-cio-quant-prod
+
+services:
+  db:
+    image: mongo:8.3.1
+    container_name: kkp-cio-quant-db
+    restart: unless-stopped
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongodb_prod_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ../..
+      dockerfile: infra/docker/backend/Dockerfile
+    container_name: kkp-cio-quant-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../config.prod.json:/app/config.json:ro
+
+  frontend:
+    build:
+      context: ../..
+      dockerfile: infra/docker/frontend/Dockerfile
+      target: prod
+      args:
+        VITE_API_BASE_URL: /api
+    container_name: kkp-cio-quant-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+
+volumes:
+  mongodb_prod_data:

@@ -13,6 +13,6 @@ export default defineConfig({
     host: true,
     allowedHosts: ['ptsecwpcgc5010'],
     port: 3000,
-    open: true
+    open: process.env.VITE_OPEN_BROWSER === 'true'
   }
 })

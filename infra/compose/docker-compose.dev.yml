@@ -1,0 +1,54 @@
+name: kkp-cio-quant-dev
+
+services:
+  db:
+    image: mongo:8.3.1
+    container_name: kkp-cio-quant-db-dev
+    restart: unless-stopped
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_dev_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ../..
+      dockerfile: infra/docker/backend/Dockerfile
+    container_name: kkp-cio-quant-backend-dev
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../backend:/app/backend
+      - ../../config.dev.json:/app/config.json:ro
+    command: python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ../..
+      dockerfile: infra/docker/frontend/Dockerfile
+      target: dev
+    container_name: kkp-cio-quant-frontend-dev
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000/api
+      VITE_OPEN_BROWSER: "false"
+    volumes:
+      - ../../frontend:/app/frontend
+      - frontend_dev_node_modules:/app/frontend/node_modules
+
+volumes:
+  mongodb_dev_data:
+  frontend_dev_node_modules:
