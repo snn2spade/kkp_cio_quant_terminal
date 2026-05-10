@@ -13,10 +13,12 @@ All notable changes to this project will be documented in this file.
     - Root `config.json` and `config.example.json` for MongoDB connection and auth settings.
     - Dev and production Docker Compose stacks with frontend, backend, and MongoDB services.
     - Dockerfiles for FastAPI backend and React frontend, plus production Nginx API proxy.
+    - Frontend README with setup, Docker, environment, routing, auth, and source structure notes.
 - Changed
     - Moved backend mock data into `app/shared/mock_data.py` and kept `main.py` as the compatibility entrypoint.
     - Replaced in-memory auth users/sessions with MongoDB `users` and `sessions` collections.
     - Frontend API base URL now reads `VITE_API_BASE_URL` for Docker/dev environment support.
+    - Backend Docker image now expects config to be mounted at runtime instead of baking root `config.json` into the image.
 - Fixed
     - Disabled Vite browser auto-open inside Docker dev to avoid `xdg-open` container crashes.
     - Moved Docker MongoDB host ports away from `27017` to avoid colliding with local MongoDB.

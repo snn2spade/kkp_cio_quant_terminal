@@ -6,6 +6,25 @@ This project has two Compose files with the same three main services:
 - `backend` - FastAPI API
 - `db` - MongoDB
 
+### Config Files
+
+The backend code always reads:
+
+```txt
+/app/config.json
+```
+
+Which root config file is used depends on how the app runs:
+
+| Runtime | Source config | Mounted/read as |
+| --- | --- | --- |
+| Local backend without Docker | `config.json` | `<project-root>/config.json` |
+| Docker dev compose | `config.dev.json` | `/app/config.json` |
+| Docker prod compose | `config.prod.json` | `/app/config.json` |
+
+Use `mongodb://localhost:27017` for local backend on your machine.
+Use `mongodb://db:27017` inside Docker Compose because `db` is the MongoDB service name.
+
 ### Development
 
 ```bash

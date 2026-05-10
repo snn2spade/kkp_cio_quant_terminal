@@ -24,7 +24,7 @@ FastAPI backend for the CIO Quant Terminal application.
    pip install -r requirements.txt
    ```
 
-5. Update root config if needed:
+5. Update root `config.json` if needed:
    ```json
    {
      "mongodb": {
@@ -37,6 +37,8 @@ FastAPI backend for the CIO Quant Terminal application.
      }
    }
    ```
+
+For Docker Compose, use `config.dev.json` or `config.prod.json`; those files are mounted into the backend container as `/app/config.json`.
 
 ## Running the Backend
 
@@ -110,4 +112,4 @@ The backend is configured to accept requests from:
 
 Currently using mock data from `app/shared/mock_data.py`. In production, this will be replaced with feature-owned database queries or external API clients.
 
-Authentication uses MongoDB through the root `config.json` file. The default database is `kkp_cio_quant_terminal`, with `users` and `sessions` collections. Session tokens expire after 7 days, and MongoDB also gets a TTL index on `sessions.expires_at`.
+Authentication uses MongoDB through `config.json`. Local runs read root `config.json`; Docker dev/prod mount `config.dev.json` or `config.prod.json` into the container as `/app/config.json`. The default database is `kkp_cio_quant_terminal`, with `users` and `sessions` collections. Session tokens expire after 7 days, and MongoDB also gets a TTL index on `sessions.expires_at`.
