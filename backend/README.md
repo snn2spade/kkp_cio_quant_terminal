@@ -42,7 +42,8 @@ backend/
 |   |-- features/          # feature-owned API routes
 |   |   |-- analysts/
 |   |   |-- data/
-|   |   `-- market/
+|   |   |-- market/
+|   |   `-- user/
 |   |-- shared/            # shared temporary data/utilities
 |   `-- main.py            # FastAPI app factory
 |-- main.py                # compatibility entrypoint for uvicorn main:app
@@ -51,6 +52,12 @@ backend/
 ```
 
 ## API Endpoints
+
+### Authentication
+- `POST /api/auth/signup` - Create a mock user account and return a 7-day session
+- `POST /api/auth/signin` - Sign in and return a 7-day session
+- `GET /api/auth/me` - Get the current authenticated user from a bearer token
+- `POST /api/auth/signout` - End the current mock session
 
 ### Market Data
 - `GET /api/market-indices` - Get market indices data
@@ -88,3 +95,5 @@ The backend is configured to accept requests from:
 ## Data Source
 
 Currently using mock data from `app/shared/mock_data.py`. In production, this will be replaced with feature-owned database queries or external API clients.
+
+Authentication currently uses in-memory mock users and sessions in `app/features/user/service.py`. Session tokens expire after 7 days. This service boundary is intended to be replaced by MongoDB-backed user/session storage later.

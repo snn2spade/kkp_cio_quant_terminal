@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 
 - Added
     - Feature-driven backend package structure with market, analysts, and data routers.
+    - Mock user authentication with sign-up, sign-in, sign-out, current-user endpoint, guest mode, and 7-day sessions.
+    - Frontend sign-in/sign-up pages, sidebar user profile state, and protected portfolio/workflow routes.
 - Changed
     - Moved backend mock data into `app/shared/mock_data.py` and kept `main.py` as the compatibility entrypoint.
 - Fixed

@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { useAuth } from '@/auth/AuthContext'
 import {
   Home,
   Users,
@@ -40,6 +42,8 @@ const colorMap = {
 }
 
 function Sidebar() {
+  const { user, isAuthenticated, signOut } = useAuth()
+  const navigate = useNavigate()
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -143,6 +147,17 @@ function Sidebar() {
         </Button>
       </div>
 
+      {!isAuthenticated && (
+        <div className="px-2 mb-2 space-y-2">
+          <Button className="w-full" size="sm" title="Sign up" onClick={() => navigate('/signup')}>
+            Sign up
+          </Button>
+          <Button variant="outline" className="w-full" size="sm" title="Sign in" onClick={() => navigate('/signin')}>
+            Sign in
+          </Button>
+        </div>
+      )}
+
       <div className="p-3 backdrop-blur-sm bg-muted/20 rounded-lg mx-2 mb-3 border border-border/30">
         <div className={cn("flex items-center", isCollapsed ? "justify-center" : "space-x-3")}>
           <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/40 flex items-center justify-center flex-shrink-0">
@@ -150,11 +165,21 @@ function Sidebar() {
           </div>
           {!isCollapsed && (
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-foreground truncate">KKP Analyst</p>
-              <p className="text-[10px] text-muted-foreground font-medium">Admin</p>
+              <p className="text-xs font-semibold text-foreground truncate">{user.username}</p>
+              <p className="text-[10px] text-muted-foreground font-medium">{user.role}</p>
             </div>
           )}
         </div>
+        {isAuthenticated && !isCollapsed && (
+          <Button
+            variant="ghost"
+            size="xs"
+            onClick={signOut}
+            className="w-full mt-3 text-muted-foreground hover:text-foreground"
+          >
+            Sign out
+          </Button>
+        )}
       </div>
     </div>
   )

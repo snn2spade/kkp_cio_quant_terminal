@@ -4,11 +4,12 @@
 const API_BASE_URL = 'http://localhost:8000/api'
 
 class ApiService {
-  async fetchData(endpoint) {
+  async fetchData(endpoint, options = {}) {
     try {
-      const response = await fetch(`${API_BASE_URL}/${endpoint}`)
+      const response = await fetch(`${API_BASE_URL}/${endpoint}`, options)
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+        const errorData = await response.json().catch(() => null)
+        throw new Error(errorData?.detail || `HTTP error! status: ${response.status}`)
       }
       return await response.json()
     } catch (error) {
@@ -74,6 +75,35 @@ class ApiService {
     const queryString = params.toString()
     const endpoint = `papers/search${queryString ? '?' + queryString : ''}`
     return this.fetchData(endpoint)
+  }
+
+  async signIn({ username, password }) {
+    return this.fetchData('auth/signin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    })
+  }
+
+  async signUp({ username, password }) {
+    return this.fetchData('auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    })
+  }
+
+  async getCurrentUser(token) {
+    return this.fetchData('auth/me', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+  }
+
+  async signOut(token) {
+    return this.fetchData('auth/signout', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+    })
   }
 }
 
