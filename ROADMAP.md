@@ -6,9 +6,8 @@ All temporary working notes, planning, current progress should put here
 - Setup FastAPI
 - Setup DB & Vector Store
 - Setup User feature
-  - Mock sign-up/sign-in completed with default Analyst role and 7-day sessions
+  - MongoDB sign-up/sign-in completed with default Analyst role and 7-day sessions
   - Guest mode completed for public pages
-  - MongoDB-backed user/session storage still pending
 - Backend folder refactor to minimal feature-driven structure
 
 ### Next sprint:

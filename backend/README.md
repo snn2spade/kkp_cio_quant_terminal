@@ -24,6 +24,20 @@ FastAPI backend for the CIO Quant Terminal application.
    pip install -r requirements.txt
    ```
 
+5. Update root config if needed:
+   ```json
+   {
+     "mongodb": {
+       "connection_string": "mongodb://localhost:27017",
+       "database": "kkp_cio_quant_terminal"
+     },
+     "auth": {
+       "default_role": "Analyst",
+       "session_days": 7
+     }
+   }
+   ```
+
 ## Running the Backend
 
 ### Development mode (with auto-reload):
@@ -54,10 +68,10 @@ backend/
 ## API Endpoints
 
 ### Authentication
-- `POST /api/auth/signup` - Create a mock user account and return a 7-day session
+- `POST /api/auth/signup` - Create a MongoDB-backed user account and return a 7-day session
 - `POST /api/auth/signin` - Sign in and return a 7-day session
 - `GET /api/auth/me` - Get the current authenticated user from a bearer token
-- `POST /api/auth/signout` - End the current mock session
+- `POST /api/auth/signout` - End the current session
 
 ### Market Data
 - `GET /api/market-indices` - Get market indices data
@@ -96,4 +110,4 @@ The backend is configured to accept requests from:
 
 Currently using mock data from `app/shared/mock_data.py`. In production, this will be replaced with feature-owned database queries or external API clients.
 
-Authentication currently uses in-memory mock users and sessions in `app/features/user/service.py`. Session tokens expire after 7 days. This service boundary is intended to be replaced by MongoDB-backed user/session storage later.
+Authentication uses MongoDB through the root `config.json` file. The default database is `kkp_cio_quant_terminal`, with `users` and `sessions` collections. Session tokens expire after 7 days, and MongoDB also gets a TTL index on `sessions.expires_at`.

@@ -3,12 +3,49 @@ import hashlib
 import secrets
 from typing import Any
 
+from pymongo import ASCENDING
+from pymongo.errors import DuplicateKeyError, PyMongoError
 
-SESSION_DAYS = 7
-DEFAULT_ROLE = "Analyst"
+from app.core.config import get_auth_config
+from app.core.database import get_database
 
-_users: dict[str, dict[str, Any]] = {}
-_sessions: dict[str, dict[str, Any]] = {}
+
+class AuthStorageError(RuntimeError):
+    pass
+
+
+_indexes_ready = False
+
+
+def _auth_config() -> dict[str, Any]:
+    config = get_auth_config()
+    return {
+        "session_days": int(config.get("session_days", 7)),
+        "default_role": config.get("default_role", "Analyst"),
+    }
+
+
+def _users_collection():
+    return get_database()["users"]
+
+
+def _sessions_collection():
+    return get_database()["sessions"]
+
+
+def _ensure_indexes() -> None:
+    global _indexes_ready
+    if _indexes_ready:
+        return
+
+    try:
+        _users_collection().create_index([("username_lower", ASCENDING)], unique=True)
+        _sessions_collection().create_index([("token", ASCENDING)], unique=True)
+        _sessions_collection().create_index([("expires_at", ASCENDING)], expireAfterSeconds=0)
+    except PyMongoError as error:
+        raise AuthStorageError("Unable to connect to MongoDB auth storage.") from error
+
+    _indexes_ready = True
 
 
 def _hash_password(password: str, salt: str) -> str:
@@ -23,68 +60,96 @@ def _public_user(user: dict[str, Any]) -> dict[str, str]:
     }
 
 
-def _find_username_key(username: str) -> str | None:
-    normalized_username = username.strip().lower()
-    for existing_username in _users:
-        if existing_username.lower() == normalized_username:
-            return existing_username
-    return None
-
-
-def _create_session(username: str) -> dict[str, Any]:
+def _create_session(user_id: str) -> dict[str, Any]:
     token = secrets.token_urlsafe(32)
-    expires_at = datetime.now(timezone.utc) + timedelta(days=SESSION_DAYS)
-    _sessions[token] = {"username": username, "expires_at": expires_at}
+    expires_at = datetime.now(timezone.utc) + timedelta(days=_auth_config()["session_days"])
+
+    try:
+        _sessions_collection().insert_one(
+            {
+                "token": token,
+                "user_id": user_id,
+                "expires_at": expires_at,
+                "created_at": datetime.now(timezone.utc),
+            }
+        )
+    except PyMongoError as error:
+        raise AuthStorageError("Unable to create auth session.") from error
+
     return {"token": token, "expires_at": expires_at.isoformat()}
 
 
 def sign_up(username: str, password: str) -> dict[str, Any]:
+    _ensure_indexes()
+
     normalized_username = username.strip()
     if not normalized_username:
         raise ValueError("Username is required.")
     if len(password) < 6:
         raise ValueError("Password must be at least 6 characters.")
-    if _find_username_key(normalized_username):
-        raise ValueError("Username is already registered.")
 
     salt = secrets.token_hex(16)
     user = {
         "id": secrets.token_hex(8),
         "username": normalized_username,
-        "role": DEFAULT_ROLE,
+        "username_lower": normalized_username.lower(),
+        "role": _auth_config()["default_role"],
         "salt": salt,
         "password_hash": _hash_password(password, salt),
+        "created_at": datetime.now(timezone.utc),
     }
-    _users[normalized_username] = user
-    session = _create_session(normalized_username)
+
+    try:
+        _users_collection().insert_one(user)
+    except DuplicateKeyError as error:
+        raise ValueError("Username is already registered.") from error
+    except PyMongoError as error:
+        raise AuthStorageError("Unable to create user account.") from error
+
+    session = _create_session(user["id"])
 
     return {"user": _public_user(user), **session}
 
 
 def sign_in(username: str, password: str) -> dict[str, Any]:
-    username_key = _find_username_key(username)
-    if not username_key:
+    _ensure_indexes()
+
+    try:
+        user = _users_collection().find_one({"username_lower": username.strip().lower()})
+    except PyMongoError as error:
+        raise AuthStorageError("Unable to read user account.") from error
+
+    if not user:
         raise ValueError("Invalid username or password.")
 
-    user = _users[username_key]
     password_hash = _hash_password(password, user["salt"])
     if not secrets.compare_digest(password_hash, user["password_hash"]):
         raise ValueError("Invalid username or password.")
 
-    session = _create_session(user["username"])
+    session = _create_session(user["id"])
     return {"user": _public_user(user), **session}
 
 
 def get_user_by_token(token: str) -> dict[str, str] | None:
-    session = _sessions.get(token)
+    _ensure_indexes()
+
+    try:
+        session = _sessions_collection().find_one({"token": token})
+    except PyMongoError as error:
+        raise AuthStorageError("Unable to read auth session.") from error
+
     if not session:
         return None
 
     if session["expires_at"] <= datetime.now(timezone.utc):
-        _sessions.pop(token, None)
+        _sessions_collection().delete_one({"token": token})
         return None
 
-    user = _users.get(session["username"])
+    try:
+        user = _users_collection().find_one({"id": session["user_id"]})
+    except PyMongoError as error:
+        raise AuthStorageError("Unable to read user account.") from error
+
     if not user:
         return None
 
@@ -92,4 +157,9 @@ def get_user_by_token(token: str) -> dict[str, str] | None:
 
 
 def sign_out(token: str) -> None:
-    _sessions.pop(token, None)
+    _ensure_indexes()
+
+    try:
+        _sessions_collection().delete_one({"token": token})
+    except PyMongoError as error:
+        raise AuthStorageError("Unable to end auth session.") from error

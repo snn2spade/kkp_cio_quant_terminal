@@ -1,0 +1,10 @@
+{
+  "mongodb": {
+    "connection_string": "mongodb://localhost:27017",
+    "database": "kkp_cio_quant_terminal"
+  },
+  "auth": {
+    "default_role": "Analyst",
+    "session_days": 7
+  }
+}
