@@ -23,7 +23,8 @@ Which root config file is used depends on how the app runs:
 | Docker prod compose | `config.prod.json` | `/app/config.json` |
 
 Use `mongodb://localhost:27017` for local backend on your machine.
-Use `mongodb://db:27017` inside Docker Compose because `db` is the MongoDB service name.
+Use `mongodb://host.docker.internal:27017` when a Docker container should connect to MongoDB running on the host machine.
+Use `mongodb://db:27017` when a Docker container should connect to the Compose MongoDB service.
 
 ### Development
 
@@ -38,11 +39,13 @@ Development URLs:
 - MongoDB from containers: mongodb://db:27017
 
 The dev backend container mounts root `config.dev.json` as `/app/config.json`.
-For Docker Compose, MongoDB should use the service hostname:
+By default, dev auth uses MongoDB running on the host machine:
 
 ```json
-"connection_string": "mongodb://db:27017"
+"connection_string": "mongodb://host.docker.internal:27017"
 ```
+
+The Compose `db` service is still available for isolated testing from the host at `mongodb://localhost:27018`.
 
 ### Production
 

@@ -1,6 +1,6 @@
 {
   "mongodb": {
-    "connection_string": "mongodb://db:27017",
+    "connection_string": "mongodb://host.docker.internal:27017",
     "database": "kkp_cio_quant_terminal"
   },
   "auth": {

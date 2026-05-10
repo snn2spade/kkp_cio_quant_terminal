@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
     - Replaced in-memory auth users/sessions with MongoDB `users` and `sessions` collections.
     - Frontend API base URL now reads `VITE_API_BASE_URL` for Docker/dev environment support.
     - Backend Docker image now expects config to be mounted at runtime instead of baking root `config.json` into the image.
+    - Docker dev config now points backend auth to host MongoDB via `host.docker.internal:27017`.
 - Fixed
     - Disabled Vite browser auto-open inside Docker dev to avoid `xdg-open` container crashes.
     - Moved Docker MongoDB host ports away from `27017` to avoid colliding with local MongoDB.

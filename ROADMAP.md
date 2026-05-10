@@ -2,7 +2,14 @@
 
 All temporary working notes, planning, current progress should put here
 
-### Current sprint: 
+### In Progress: 
+
+
+### Future Plan:
+- Analyst feature/page
+- Market feature/page
+
+### Done
 - Setup FastAPI
 - Setup DB & Vector Store
 - Setup User feature
@@ -12,10 +19,5 @@ All temporary working notes, planning, current progress should put here
 - Setup Docker infra
   - Dev compose stack completed for frontend, backend, and MongoDB
   - Production compose stack completed for frontend, backend, and MongoDB
-
-### Next sprint:
-- Analyst feature/page
-- Market feature/page
-
 
 
