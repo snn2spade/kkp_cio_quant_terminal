@@ -9,7 +9,17 @@ FastAPI backend for the CIO Quant Terminal application.
    cd backend
    ```
 
-2. Install dependencies:
+2. Create a virtual environment:
+   ```bash
+   python -m venv .venv
+   ```
+
+3. Activate the virtual environment:
+   ```bash
+   .\.venv\Scripts\Activate.ps1
+   ```
+
+4. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
@@ -19,11 +29,6 @@ FastAPI backend for the CIO Quant Terminal application.
 ### Development mode (with auto-reload):
 ```bash
 python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
-```
-
-### Or use the npm script from root:
-```bash
-npm run backend
 ```
 
 ## API Endpoints
